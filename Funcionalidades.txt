@@ -1,0 +1,33 @@
+
+Jose Alejandro Diaz Legro
+
+RF01 Registro de usuarios
+RF02 Gestión de seguridad de acceso
+RF03 Recuperación de contraseña
+RF04 Gestión de roles de usuario
+
+
+
+Juan Diego Delgado Jerez
+
+RF05 Solicitud y aprobación de roles especiales
+RF06 Gestión de permisos por rol
+RF07 Creación y gestión de torneos
+RF08 Programación y gestión de partidos
+
+
+Samuel Martinez Borbon
+
+RF09 Gestión de convocatorias
+RF10 Validación y control de resultados
+RF11 Consulta de calendarios y reglas
+RF12 Envío y recepción de notificaciones
+
+
+
+Lizbeth Carolina Bautista
+
+RF13 Consulta pública de resultados
+RF14 Visualización de estadísticas
+RF15 Reporte de incidencias y suspensiones
+RF16 Historial de torneos y partidos 
