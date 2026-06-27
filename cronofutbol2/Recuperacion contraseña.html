@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>CronoFútbol Elite - Recuperar acceso</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <style>
+      body {
+        background: #0e0e0e;
+        font-family: Arial, sans-serif;
+      }
+      .glass {
+        background: rgba(30, 30, 30, 0.7);
+        backdrop-filter: blur(18px);
+        border: 1px solid #444;
+      }
+      .particle {
+        position: absolute;
+        background: #95d3ba;
+        border-radius: 50%;
+        opacity: 0.25;
+        animation: float 8s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="min-h-screen flex items-center justify-center overflow-hidden relative"
+  >
+    <div id="particle-container" class="absolute inset-0"></div>
+
+    <div class="glass rounded-xl p-8 w-full max-w-md text-white relative z-10">
+      <h1 class="text-3xl font-bold text-center mb-2">
+        CronoFútbol <span class="text-yellow-400">Elite</span>
+      </h1>
+      <p class="text-center text-gray-400 mb-6">Recuperar contraseña</p>
+
+      <form id="recoveryForm" class="space-y-4" action="index.html">
+        <div>
+          <label class="block mb-2">Correo electrónico</label>
+          <input
+            id="email"
+            type="email"
+            required
+            placeholder="nombre@club.com"
+            class="w-full rounded bg-gray-900 border border-gray-600 p-3 text-white focus:outline-none focus:border-emerald-500"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-emerald-600 hover:bg-emerald-500 rounded p-3 font-bold transition-colors"
+        >
+          Enviar enlace de recuperación
+        </button>
+      </form>
+
+      <div id="success-overlay" class="hidden mt-6 text-center">
+        <div class="text-5xl">✅</div>
+        <h2 class="text-2xl font-bold mt-3">¡Enlace enviado!</h2>
+        <p class="text-gray-300 mt-2">
+          Si el correo existe, recibirás instrucciones en unos minutos.
+        </p>
+        <button
+          onclick="window.location.href='index.html'"
+          class="mt-5 border border-emerald-500 hover:bg-emerald-500/20 px-4 py-2 rounded transition-colors"
+        >
+          Ir al Inicio de Sesión
+        </button>
+      </div>
+    </div>
+
+    <script>
+      function createParticles() {
+        const c = document.getElementById("particle-container");
+        for (let i = 0; i < 30; i++) {
+          const p = document.createElement("div");
+          p.className = "particle";
+          const s = Math.random() * 6 + 2;
+          p.style.width = s + "px";
+          p.style.height = s + "px";
+          p.style.left = Math.random() * 100 + "%";
+          p.style.top = Math.random() * 100 + "%";
+          p.style.animationDuration = Math.random() * 8 + 6 + "s";
+          c.appendChild(p);
+        }
+      }
+
+      function showSuccess() {
+        document.getElementById("recoveryForm").style.display = "none";
+        document.getElementById("success-overlay").classList.remove("hidden");
+      }
+
+      document
+        .getElementById("recoveryForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          
+          // OPCIÓN A: Mostrar la alerta de éxito primero (Actual)
+          showSuccess();
+
+          // OPCIÓN B: Si prefieres que redirija DE INMEDIATO al dar clic en enviar,
+          // borra la línea de "showSuccess()" y descomenta la línea de abajo:
+          // window.location.href = "login.html";
+        });
+
+      createParticles();
+    </script>
+  </body>
+</html>
