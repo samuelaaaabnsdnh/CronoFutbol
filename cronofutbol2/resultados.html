@@ -1,0 +1,734 @@
+<!doctype html>
+
+<html class="dark" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>CronoFutbol</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Inter:wght@400;500;700;900&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-dim": "#00170f",
+              "secondary-fixed": "#ffddb5",
+              "tertiary-fixed": "#ffdad9",
+              "on-background": "#c6ebd8",
+              "surface-container-high": "#0d3024",
+              "inverse-primary": "#006e24",
+              "on-tertiary-fixed": "#3d050b",
+              "on-error-container": "#ffdad6",
+              "surface-container-lowest": "#00120a",
+              "on-secondary": "#452b00",
+              "on-surface-variant": "#becaba",
+              "surface-container": "#02251a",
+              "on-tertiary-fixed-variant": "#763032",
+              "amber-action": "#F2A93B",
+              "on-secondary-container": "#3d2500",
+              "error-container": "#93000a",
+              "on-primary-fixed": "#002106",
+              "inverse-surface": "#c6ebd8",
+              tertiary: "#ffb3b2",
+              surface: "#00170f",
+              background: "#00170f",
+              "surface-container-low": "#002116",
+              "on-tertiary-container": "#501418",
+              "secondary-fixed-dim": "#ffb956",
+              "on-primary-container": "#00320c",
+              "text-primary": "#FFFFFF",
+              "inverse-on-surface": "#15362a",
+              "primary-container": "#40a44e",
+              "on-error": "#690005",
+              "surface-tint": "#78dc7e",
+              "outline-variant": "#3f4a3d",
+              "on-primary": "#00390f",
+              "surface-card": "#0F3D2D",
+              "on-secondary-fixed-variant": "#633f00",
+              "tertiary-container": "#d07878",
+              "tertiary-fixed-dim": "#ffb3b2",
+              "surface-variant": "#193b2e",
+              "soft-alert": "#E08585",
+              "secondary-container": "#c58311",
+              error: "#ffb4ab",
+              "primary-fixed-dim": "#78dc7e",
+              secondary: "#ffb956",
+              primary: "#78dc7e",
+              "turf-active": "#3FA34D",
+              "text-muted": "#A3B8B0",
+              "surface-container-highest": "#193b2e",
+              "primary-fixed": "#93f998",
+              "on-primary-fixed-variant": "#005319",
+              outline: "#889485",
+              "pitch-dark": "#0B2E22",
+              "on-secondary-fixed": "#2a1800",
+              "surface-bright": "#1e3f32",
+              "on-tertiary": "#591a1e",
+              "on-surface": "#c6ebd8",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "stack-lg": "32px",
+              "margin-mobile": "16px",
+              base: "4px",
+              gutter: "24px",
+              "container-max": "1280px",
+              "stack-md": "16px",
+              "stack-sm": "8px",
+            },
+            fontFamily: {
+              "display-lg": ["Anton"],
+              "data-tabular": ["JetBrains Mono"],
+              "headline-md": ["Anton"],
+              "body-lg": ["Inter"],
+              "body-md": ["Inter"],
+              "display-lg-mobile": ["Anton"],
+              "label-caps": ["Inter"],
+            },
+            fontSize: {
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "0.02em",
+                  fontWeight: "900",
+                },
+              ],
+              "data-tabular": [
+                "16px",
+                { lineHeight: "1.4", fontWeight: "500" },
+              ],
+              "headline-md": [
+                "24px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "0.01em",
+                  fontWeight: "900",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "body-md": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+              "display-lg-mobile": [
+                "32px",
+                { lineHeight: "1.1", fontWeight: "900" },
+              ],
+              "label-caps": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.1em", fontWeight: "700" },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #00170f;
+        background-image: radial-gradient(
+          circle at 50% 50%,
+          #0f3d2d 0%,
+          #00170f 100%
+        );
+        color: #c6ebd8;
+        overflow-x: hidden;
+      }
+
+      .stadium-texture {
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L30 60M0 30L60 30' fill='none' stroke='%233FA34D' stroke-width='0.5' stroke-opacity='0.05'/%3E%3C/svg%3E");
+      }
+
+      .glow-primary {
+        box-shadow: 0 0 20px rgba(120, 220, 126, 0.15);
+      }
+
+      .glow-amber {
+        box-shadow: 0 0 25px rgba(242, 169, 59, 0.2);
+      }
+
+      .pulse-dot {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(1.2);
+        }
+      }
+
+      .selected-card {
+        border-color: #78dc7e !important;
+        background-color: #193b2e !important;
+        box-shadow: inset 0 0 15px rgba(120, 220, 126, 0.1);
+      }
+
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #00120a;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #3f4a3d;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body
+    class="font-body-md text-body-md stadium-texture min-h-screen flex flex-col"
+  >
+    <!-- Top Navigation Anchor -->
+    <header
+      class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-gutter max-w-container-max mx-auto h-16 bg-surface border-b border-outline-variant"
+    >
+      <div class="flex items-center gap-stack-md">
+        <a
+  href="index.html"
+  class="font-display-lg-mobile text-display-lg-mobile text-primary tracking-tighter uppercase hover:text-white transition-colors duration-200"
+>
+  CronoFutbol
+</a>
+        >
+        <div class="h-6 w-px bg-outline-variant hidden md:block"></div>
+        <div
+          class="hidden md:flex items-center gap-base text-primary font-bold border-b-2 border-primary pb-1"
+        >
+          <span class="material-symbols-outlined text-[18px]">terminal</span>
+          <span class="font-label-caps text-label-caps uppercase"
+            >Elite Console v2.4</span
+          >
+        </div>
+      </div>
+      <div class="flex items-center gap-stack-lg">
+        <div
+          class="hidden lg:flex items-center gap-stack-md bg-surface-container-low px-stack-md py-1 rounded-full border border-outline-variant"
+        >
+          <div class="flex items-center gap-stack-sm">
+            <div class="w-2 h-2 bg-turf-active rounded-full pulse-dot"></div>
+            <span
+              class="font-data-tabular text-[12px] text-turf-active uppercase"
+              >Server: Online</span
+            >
+          </div>
+          <div class="w-px h-3 bg-outline-variant"></div>
+          <div class="flex items-center gap-stack-sm">
+            <span class="material-symbols-outlined text-[14px] text-text-muted"
+              >wifi</span
+            >
+            <span class="font-data-tabular text-[12px] text-text-muted"
+              >14ms</span
+            >
+          </div>
+        </div>
+        <button
+          class="bg-primary-container text-on-primary-container px-stack-md py-1.5 rounded-lg font-bold text-[14px] uppercase hover:opacity-80 transition-all"
+        >
+          Cerrar Sesión
+        </button>
+      </div>
+    </header>
+    <!-- Main Workspace Container -->
+    <main class="flex flex-1 pt-16 h-screen overflow-hidden">
+      <!-- Sidebar Navigation (L) -->
+      <aside
+        class="hidden md:flex flex-col w-64 bg-surface-container border-r border-outline-variant shrink-0"
+      >
+        <div class="p-stack-md flex flex-col gap-base">
+          <div
+            class="p-stack-sm flex items-center gap-stack-md bg-primary-container text-on-primary-container rounded-lg"
+          >
+            <span class="material-symbols-outlined">pending_actions</span>
+            <span class="font-bold">Por Validar</span>
+            <span
+              class="ml-auto bg-on-primary-container text-primary-container text-[10px] px-1.5 rounded-full"
+              >12</span
+            >
+          </div>
+          <div
+            class="p-stack-sm flex items-center gap-stack-md text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg cursor-pointer"
+          >
+            <span class="material-symbols-outlined">verified</span>
+            <span>Validados</span>
+          </div>
+          <div
+            class="p-stack-sm flex items-center gap-stack-md text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg cursor-pointer"
+          >
+            <span class="material-symbols-outlined">history</span>
+            <span>Historial</span>
+          </div>
+          <div
+            class="p-stack-sm flex items-center gap-stack-md text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg cursor-pointer"
+          >
+            <span class="material-symbols-outlined">analytics</span>
+            <span>Estadísticas</span>
+          </div>
+        </div>
+        <div class="mt-auto p-stack-md border-t border-outline-variant">
+          <div class="flex items-center gap-stack-sm mb-stack-sm">
+            <div
+              class="w-8 h-8 rounded-full bg-surface-container-highest border border-outline flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-primary text-[18px]"
+                >person</span
+              >
+            </div>
+            <div>
+              <p class="font-bold text-[13px] text-primary leading-none">
+                M. Arribas
+              </p>
+              <p class="text-[11px] text-text-muted">
+                Árbitro de Mesa Principal
+              </p>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <!-- Center Panel: Matches Queue -->
+      <section
+        class="flex-1 flex flex-col overflow-y-auto bg-surface-dim/50 backdrop-blur-sm p-gutter"
+      >
+        <div class="max-w-4xl mx-auto w-full">
+          <div class="flex justify-between items-end mb-stack-lg">
+            <div>
+              <h1
+                class="font-headline-md text-headline-md text-primary uppercase"
+              >
+                Pendientes de Validación
+              </h1>
+              <p class="text-text-muted font-body-md">
+                Revisa y confirma los resultados enviados desde el campo.
+              </p>
+            </div>
+            <div class="flex gap-stack-sm">
+              <button
+                class="p-2 border border-outline-variant rounded hover:bg-surface-variant"
+              >
+                <span class="material-symbols-outlined">filter_list</span>
+              </button>
+              <button
+                class="p-2 border border-outline-variant rounded hover:bg-surface-variant"
+              >
+                <span class="material-symbols-outlined">refresh</span>
+              </button>
+            </div>
+          </div>
+          <!-- Matches Grid -->
+          <div class="grid grid-cols-1 gap-stack-md">
+            <!-- Match Card 1 (Active) -->
+            <div
+              class="selected-card p-stack-md rounded-lg border border-outline-variant flex flex-col md:flex-row items-center gap-gutter relative transition-all duration-300"
+            >
+              <div
+                class="absolute top-2 right-2 flex items-center gap-1 text-[10px] text-turf-active font-bold uppercase tracking-widest"
+              >
+                <span
+                  class="w-1.5 h-1.5 bg-turf-active rounded-full pulse-dot"
+                ></span>
+                Finalizado
+              </div>
+              <!-- Teams and Score -->
+              <div class="flex-1 flex items-center justify-between w-full">
+                <!-- Home Team -->
+                <div class="flex-1 flex flex-col items-center gap-stack-sm">
+                  <div
+                    class="w-16 h-16 bg-surface-container-highest rounded border border-outline-variant flex items-center justify-center p-2"
+                  >
+                    <img
+                      class="w-full h-full object-contain"
+                      data-alt="Minimalist geometric football crest for a team called Titan FC using neon green and deep black colors on a dark background, professional sports branding style."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPpEHi9rt8TgiSBItB8SKCST7ODXqozK6QOreEzo5AKJdBbYX-p2UhLBjo-Rvqh5rUo7h62rB_Ae9PX-ooxRorhUx62yqIbbGWvWjkZfSlbLhcyKBwIBML6vPXM-pN8XmZzrntEQLibAT9xptOBT10haHg5X5U5A8CcawqBUo5PnAujEhHH_lP6Ddel1uA9zvM-ZOP4RkyUSVy7xld7BSZO3YUoyRYHEmTRJLhkB-LJJN__fUEqhOjYjq-C5BhtQ9L72Fn_e04I102"
+                    />
+                  </div>
+                  <span
+                    class="font-headline-md text-[18px] text-primary uppercase text-center"
+                    >Titan FC</span
+                  >
+                </div>
+                <!-- Big Scoreboard -->
+                <div class="flex flex-col items-center px-gutter">
+                  <div
+                    class="font-display-lg text-amber-action text-[64px] leading-none flex items-center gap-stack-md"
+                  >
+                    <span>2</span>
+                    <span class="text-surface-variant text-[32px]">-</span>
+                    <span>1</span>
+                  </div>
+                  <div
+                    class="bg-surface-container-high px-stack-md py-1 rounded-full border border-outline-variant mt-2"
+                  >
+                    <span class="font-data-tabular text-[12px] text-text-muted"
+                      >Grupo A • Jornada 14</span
+                    >
+                  </div>
+                </div>
+                <!-- Away Team -->
+                <div class="flex-1 flex flex-col items-center gap-stack-sm">
+                  <div
+                    class="w-16 h-16 bg-surface-container-highest rounded border border-outline-variant flex items-center justify-center p-2"
+                  >
+                    <img
+                      class="w-full h-full object-contain"
+                      data-alt="Minimalist professional sports logo for a football team named Rayo Norte featuring sharp lightning bolts and a silver color palette against a deep nocturnal green background."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvQD01ci4Or4DdsWOAtvmHK4tsbwNf_pUU1WGCTe8iP_xvHDXd5tIVljZKExYY8Qb4Wivzm5edb26BUX7eatnNaBJjTgdgPLjb8fUlHF8bwV4fUEikVa036QPrl3dpQc4lC1VYOEtO9peaN0zrwBWYkPFAiYNPR27Wk08NmJyWrkZAsN7N335x0YRCLJ1MTmTVsmBZyGT6L7JZpAHpx-HAjPYtpzErOpEsr1P51UOBThhuc0P9oGUwXKLh5odqh6vc63JO2QQuQfrk"
+                    />
+                  </div>
+                  <span
+                    class="font-headline-md text-[18px] text-primary uppercase text-center"
+                    >Rayo Norte</span
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- Match Card 2 -->
+            <div
+              class="bg-surface-card p-stack-md rounded-lg border border-outline-variant flex flex-col md:flex-row items-center gap-gutter opacity-80 hover:opacity-100 transition-all cursor-pointer"
+            >
+              <div class="flex-1 flex items-center justify-between w-full">
+                <div class="flex-1 flex flex-col items-center gap-stack-sm">
+                  <div
+                    class="w-12 h-12 bg-surface-container-highest rounded border border-outline-variant flex items-center justify-center p-2"
+                  >
+                    <img
+                      class="w-full h-full object-contain"
+                      data-alt="A clean circular football club emblem with a stylized mountain icon, modern flat vector style using primary green and white, high contrast."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvP5XMK75rbyPnCkgTbnzBJ4yl-KDyVnZP-vJRLLGBRXmkVQ4zLRWBQwjNeVxVakizwAtp5Qq8n-sgJyTa6UpDiaCV5_XxmrK9-Yz6WhcUgaUgb3XkRbY05Jq0gMJQfkP09C8cBIKsc6xXzLOc5RzzvBwJjDHPFHox1HTVwHNBKGkwBioner6eD1sBWGA6O2trMY16c-VSiJDeZIKKMjrlsIcCw7blCB1bhRFC25XZLKA5lsbG_3OPvlaoJmzpjqTLO1k1s7n8xVCy"
+                    />
+                  </div>
+                  <span
+                    class="font-headline-md text-[14px] text-text-muted uppercase"
+                    >Pumas Oro</span
+                  >
+                </div>
+                <div class="flex flex-col items-center px-stack-lg">
+                  <div
+                    class="font-display-lg text-primary text-[40px] leading-none flex items-center gap-stack-sm"
+                  >
+                    <span>0</span>
+                    <span class="text-surface-variant text-[24px]">-</span>
+                    <span>4</span>
+                  </div>
+                </div>
+                <div class="flex-1 flex flex-col items-center gap-stack-sm">
+                  <div
+                    class="w-12 h-12 bg-surface-container-highest rounded border border-outline-variant flex items-center justify-center p-2"
+                  >
+                    <img
+                      class="w-full h-full object-contain"
+                      data-alt="An aggressive modern sports shield for a team called Iron Eagles with a stylized bird silhouette in steel grey and electric blue accents."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1UAEDBBK8RW3Y1wgqv9NsoNA0Y4lllyBwch9N267lMwBdywA50z1hABbZpJk3wjXDor1Oqb0Arq4OIQa1E0Xu7weNItCGHzjkggB98NAcKEzdS0a_Jt4oNkaUytoz0PStrq86Ondczhz9bsa_IKyib6-PRdS9-Kh611fTZWYiJkqedXjOd9fVbwI7Du0i8SO9KShBsV89qkHtuUTqHio1aUe6SEihhPGfHTuSaRRKIzuyRdrPKepwJwYgOXVpA2b9kR0lku0bHM9p"
+                    />
+                  </div>
+                  <span
+                    class="font-headline-md text-[14px] text-text-muted uppercase"
+                    >Eagles
+                  </span>
+                </div>
+              </div>
+            </div>
+            <!-- Match Card 3 -->
+            <div
+              class="bg-surface-card p-stack-md rounded-lg border border-outline-variant flex flex-col md:flex-row items-center gap-gutter opacity-80 hover:opacity-100 transition-all cursor-pointer"
+            >
+              <div class="flex-1 flex items-center justify-between w-full">
+                <div class="flex-1 flex flex-col items-center gap-stack-sm">
+                  <div
+                    class="w-12 h-12 bg-surface-container-highest rounded border border-outline-variant flex items-center justify-center p-2"
+                  >
+                    <img
+                      class="w-full h-full object-contain"
+                      data-alt="Minimalist abstract football team logo with a vertical pillar shape in gold and black, elegant professional aesthetic."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZFldaObvUH8F6R7Mo1cpWlvgmTlnBqvgMD1WD3Z0dBXBFGBrFjMhyN6f9RNAGk_1aPsqKraTwA1YSPj3iMGQBF4gWXevGyagK00x999h8QWIcueIK0Uh2TD4TnHlbh9n6seUUm18ZOw3jEbffZiVpX_0qatP0MBJlRphJkF-jTYhI4CzTkzTPjyzXWuGCSZTjEvAnS-xzbj6cCoSHbp9hbqs7LI8KgjmeolLZjpX-LwK3ntKHb-zJ12FCRF1GOKfPrYDpnZ7AGM6Y"
+                    />
+                  </div>
+                  <span
+                    class="font-headline-md text-[14px] text-text-muted uppercase"
+                    >Colosos FC</span
+                  >
+                </div>
+                <div class="flex flex-col items-center px-stack-lg">
+                  <div
+                    class="font-display-lg text-primary text-[40px] leading-none flex items-center gap-stack-sm"
+                  >
+                    <span>2</span>
+                    <span class="text-surface-variant text-[24px]">-</span>
+                    <span>2</span>
+                  </div>
+                </div>
+                <div class="flex-1 flex flex-col items-center gap-stack-sm">
+                  <div
+                    class="w-12 h-12 bg-surface-container-highest rounded border border-outline-variant flex items-center justify-center p-2"
+                  >
+                    <img
+                      class="w-full h-full object-contain"
+                      data-alt="Dynamic football team badge featuring a wave pattern in deep teal and neon green, modern sport identity."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWJbFcDjR85R7cnpfOBuxYt640GZyOB5JTqDCBmxty9-w_SI3p3T7SmJ4az1O6QYvH5m2eMjRySsEYxklQmLRTdIVD0CBGFItxTtVBN7kODReTHRvFJSJuZ928YPxnVP4Y02OyjLP7mvtUVnpcFeSVNBoPsyJ51NeHDYjHZksEOLK6tXrK1ENNs_POEdBnzeENSWtvc82JFhxJGzIB3lDl2_b6Iz5v-N-QiRzwtzBBTq5sjQCJeSjYh1Qtnn0ZNA_Rb2S4T7sTJsh_"
+                    />
+                  </div>
+                  <span
+                    class="font-headline-md text-[14px] text-text-muted uppercase"
+                    >Atlántico</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Right Panel: Control Console -->
+      <aside
+        class="hidden xl:flex flex-col w-[380px] bg-pitch-dark border-l border-outline-variant shrink-0"
+      >
+        <div
+          class="p-stack-md border-b border-outline-variant bg-surface-container-high"
+        >
+          <h2
+            class="font-headline-md text-[18px] text-primary flex items-center gap-stack-sm uppercase"
+          >
+            <span class="material-symbols-outlined text-amber-action"
+              >settings_input_component</span
+            >
+            Consola de Control
+          </h2>
+          <p class="text-[12px] text-text-muted mt-1">
+            ID Encuentro:
+            <span class="text-primary font-data-tabular">#AL-2024-0012</span>
+          </p>
+        </div>
+        <div class="p-stack-md flex-1 overflow-y-auto space-y-stack-lg">
+          <!-- Score Adjustment -->
+          <section>
+            <label
+              class="font-label-caps text-label-caps text-primary block mb-stack-sm"
+              >AJUSTE DE MARCADOR FINAL</label
+            >
+            <div class="grid grid-cols-2 gap-stack-md">
+              <div
+                class="bg-surface-container p-stack-sm rounded border border-outline-variant flex flex-col items-center"
+              >
+                <span class="text-[10px] text-text-muted uppercase mb-1"
+                  >Local</span
+                >
+                <div class="flex items-center gap-stack-md">
+                  <button class="p-1 hover:text-primary">
+                    <span class="material-symbols-outlined">remove_circle</span>
+                  </button>
+                  <span class="font-display-lg text-[24px] text-primary"
+                    >2</span
+                  >
+                  <button class="p-1 hover:text-primary">
+                    <span class="material-symbols-outlined">add_circle</span>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="bg-surface-container p-stack-sm rounded border border-outline-variant flex flex-col items-center"
+              >
+                <span class="text-[10px] text-text-muted uppercase mb-1"
+                  >Visitante</span
+                >
+                <div class="flex items-center gap-stack-md">
+                  <button class="p-1 hover:text-primary">
+                    <span class="material-symbols-outlined">remove_circle</span>
+                  </button>
+                  <span class="font-display-lg text-[24px] text-primary"
+                    >1</span
+                  >
+                  <button class="p-1 hover:text-primary">
+                    <span class="material-symbols-outlined">add_circle</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- Incidents Section -->
+          <section>
+            <div class="flex justify-between items-center mb-stack-sm">
+              <label class="font-label-caps text-label-caps text-primary block"
+                >INCIDENCIAS DEL PARTIDO</label
+              >
+              <button class="text-[10px] text-primary hover:underline">
+                + Añadir
+              </button>
+            </div>
+            <div class="space-y-stack-sm">
+              <div
+                class="bg-surface-container-low p-stack-sm rounded flex items-center gap-stack-sm text-[13px] border-l-4 border-amber-action"
+              >
+                <span
+                  class="material-symbols-outlined text-[16px] text-amber-action"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >warning</span
+                >
+                <span class="text-on-surface"
+                  >Min 42: Amarilla #10 (Titan FC)</span
+                >
+                <button class="ml-auto text-text-muted hover:text-error">
+                  <span class="material-symbols-outlined text-[16px]"
+                    >close</span
+                  >
+                </button>
+              </div>
+              <div
+                class="bg-surface-container-low p-stack-sm rounded flex items-center gap-stack-sm text-[13px] border-l-4 border-soft-alert"
+              >
+                <span
+                  class="material-symbols-outlined text-[16px] text-soft-alert"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >error</span
+                >
+                <span class="text-on-surface"
+                  >Min 88: Roja #4 (Rayo Norte)</span
+                >
+                <button class="ml-auto text-text-muted hover:text-error">
+                  <span class="material-symbols-outlined text-[16px]"
+                    >close</span
+                  >
+                </button>
+              </div>
+            </div>
+          </section>
+          <!-- Audit Log -->
+          <section>
+            <label
+              class="font-label-caps text-label-caps text-primary block mb-stack-sm"
+              >REGISTRO DE CAMPO</label
+            >
+            <div
+              class="bg-surface-dim p-stack-sm rounded font-data-tabular text-[11px] text-text-muted border border-outline-variant h-24 overflow-y-auto"
+            >
+              <p>[20:42:01] Marcador enviado por Árbitro Principal</p>
+              <p>[20:42:15] Incidencia añadida: Doble amarilla</p>
+              <p>[20:44:10] Esperando validación de mesa...</p>
+              <p class="text-turf-active">Ready for verification sequence.</p>
+            </div>
+          </section>
+          <!-- Rejection Reason (Conditional) -->
+          <section class="hidden" id="rejection-panel">
+            <label
+              class="font-label-caps text-label-caps text-soft-alert block mb-stack-sm"
+              >MOTIVO DE RECHAZO</label
+            >
+            <textarea
+              class="w-full bg-surface-container border border-soft-alert rounded p-2 text-sm text-on-surface focus:ring-1 focus:ring-soft-alert outline-none"
+              placeholder="Indique la discrepancia detectada..."
+            ></textarea>
+          </section>
+        </div>
+        <!-- Action Buttons -->
+        <div
+          class="p-stack-md border-t border-outline-variant bg-surface-container flex flex-col gap-stack-sm"
+        >
+          <button
+            class="w-full bg-[#10B981] text-[#00120a] font-black py-4 rounded uppercase text-[16px] hover:brightness-110 transition-all flex items-center justify-center gap-stack-sm glow-primary"
+            id="btn-validate"
+          >
+            <span class="material-symbols-outlined font-bold"
+              >check_circle</span
+            >
+            Validar Resultado
+          </button>
+          <div class="grid grid-cols-2 gap-stack-sm">
+            <button
+              class="bg-surface-container-high border border-soft-alert text-soft-alert font-bold py-2 rounded text-[12px] uppercase hover:bg-soft-alert hover:text-on-error transition-all"
+              id="btn-reject"
+            >
+              Rechazar
+            </button>
+            <button
+              class="bg-surface-container-high border border-outline-variant text-text-muted font-bold py-2 rounded text-[12px] uppercase hover:bg-surface-variant transition-all"
+            >
+              Editar Acta
+            </button>
+          </div>
+        </div>
+      </aside>
+    </main>
+    <!-- Footer Identity -->
+    <footer
+      class="w-full py-4 px-margin-mobile flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto border-t border-outline-variant bg-surface-container-lowest z-50"
+    >
+      <p class="font-label-caps text-label-caps text-on-surface-variant">
+        © 2024 ARENA LEAGUE. SISTEMA DE GESTIÓN DEPORTIVA ELITE.
+      </p>
+      <div class="flex gap-stack-lg mt-2 md:mt-0">
+        <span
+          class="font-label-caps text-label-caps text-on-surface-variant uppercase cursor-pointer hover:text-primary transition-colors"
+          >Soporte Técnico</span
+        >
+        <span
+          class="font-label-caps text-label-caps text-on-surface-variant uppercase cursor-pointer hover:text-primary transition-colors"
+          >Protocolo de Arbitraje</span
+        >
+      </div>
+    </footer>
+    <script>
+      // Micro-interactions for the Elite Console
+      const btnReject = document.getElementById("btn-reject");
+      const rejectionPanel = document.getElementById("rejection-panel");
+      const btnValidate = document.getElementById("btn-validate");
+
+      btnReject.addEventListener("click", () => {
+        rejectionPanel.classList.toggle("hidden");
+        if (!rejectionPanel.classList.contains("hidden")) {
+          btnReject.textContent = "Confirmar Rechazo";
+          btnReject.classList.add("bg-soft-alert", "text-on-error");
+        } else {
+          btnReject.textContent = "Rechazar";
+          btnReject.classList.remove("bg-soft-alert", "text-on-error");
+        }
+      });
+
+      btnValidate.addEventListener("mousedown", () => {
+        btnValidate.style.transform = "scale(0.98)";
+      });
+
+      btnValidate.addEventListener("mouseup", () => {
+        btnValidate.style.transform = "scale(1)";
+        // Simulate success
+        btnValidate.innerHTML =
+          '<span class="material-symbols-outlined">sync</span> PROCESANDO...';
+        btnValidate.classList.add("animate-pulse");
+        setTimeout(() => {
+          btnValidate.innerHTML =
+            '<span class="material-symbols-outlined">verified</span> RESULTADO VALIDADO';
+          btnValidate.classList.remove("animate-pulse", "bg-[#10B981]");
+          btnValidate.classList.add("bg-turf-active");
+        }, 1200);
+      });
+
+      // Lateral Latency Simulation
+      setInterval(() => {
+        const latencies = ["12ms", "14ms", "15ms", "13ms", "11ms"];
+        const span = document.querySelector(
+          ".font-data-tabular.text-text-muted",
+        );
+        if (span)
+          span.textContent =
+            latencies[Math.floor(Math.random() * latencies.length)];
+      }, 5000);
+    </script>
+  </body>
+</html>
