@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>RF14 - Visualización de Estadísticas</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#95d3ba",
+                        "primary-container": "#064e3b",
+                        "on-primary-container": "#80bea6",
+                        "bg-main": "#0a0a0a",
+                        "bg-card": "#1f2937",
+                        "bg-container": "#171717",
+                        "surface-container-low": "#191c1b",
+                        "border-base": "#374151",
+                        "on-surface": "#e1e3e0",
+                        "on-surface-variant": "#bfc9c3"
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+</head>
+<body class="bg-bg-main text-on-surface h-screen overflow-hidden flex flex-col md:flex-row">
+
+<aside class="hidden md:flex bg-surface-container-low border-r border-border-base w-64 h-full flex-col p-4 gap-2 shrink-0">
+    <div class="flex items-center gap-3 mb-6 px-2">
+        <div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">sports_soccer</span>
+        </div>
+        <div>
+            <h1 class="text-lg font-bold text-primary leading-none">CronoFútbol</h1>
+            <span class="text-xs text-on-surface-variant">Público</span>
+        </div>
+    </div>
+    <nav class="flex-1 flex flex-col gap-2">
+        <a href="RF13.html" class="flex items-center gap-3 text-on-surface-variant hover:bg-gray-800 rounded-lg px-4 py-3 text-sm transition-colors">
+            <span class="material-symbols-outlined">analytics</span> RF13: Resultados
+        </a>
+        <a href="RF14.html" class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 text-sm font-semibold">
+            <span class="material-symbols-outlined">leaderboard</span> RF14: Estadísticas
+        </a>
+        <a href="RF15.html" class="flex items-center gap-3 text-on-surface-variant hover:bg-gray-800 rounded-lg px-4 py-3 text-sm transition-colors">
+            <span class="material-symbols-outlined">report</span> RF15: Incidencias
+        </a>
+        <a href="RF16.html" class="flex items-center gap-3 text-on-surface-variant hover:bg-gray-800 rounded-lg px-4 py-3 text-sm transition-colors">
+            <span class="material-symbols-outlined">history</span> RF16: Historial
+        </a>
+    </nav>
+</aside>
+
+<main class="flex-1 overflow-y-auto bg-bg-main p-6">
+    <div class="space-y-6">
+        <div>
+            <h2 class="text-3xl font-bold text-on-surface mb-2">RF14: Tabla de Goleadores y Estadísticas</h2>
+            <p class="text-on-surface-variant">Consulta el rendimiento individual de los máximos anotadores del torneo.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-1">
+                <div class="bg-bg-card border border-border-base rounded-xl p-6">
+                    <h3 class="text-xl font-semibold text-primary mb-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined">tune</span> Parámetros
+                    </h3>
+
+                    <form class="space-y-6" action="RF14.html">
+                        <div>
+                            <label class="block text-xs font-semibold text-on-surface-variant mb-1">Métrica Principal</label>
+                            <select class="w-full bg-bg-container border border-border-base rounded-lg px-4 py-2 text-on-surface focus:outline-none">
+                                <option>Goles Anotados</option>
+                                <option>Tarjetas Amarillas</option>
+                                <option>Asistencias</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="w-full bg-primary-container hover:bg-green-800 text-primary font-semibold py-3 rounded-lg border border-border-base transition-colors">
+                            Actualizar Gráficas
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <div class="bg-bg-card border border-border-base rounded-xl p-6 overflow-hidden">
+                    <h3 class="text-xl font-semibold mb-4 text-on-surface flex items-center gap-2">
+                        <span class="material-symbols-outlined text-yellow-500">military_tech</span> Líderes de Goleo
+                    </h3>
+                    <div class="overflow-x-auto rounded-lg border border-border-base">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-surface-container-low text-xs font-semibold text-on-surface-variant border-b border-border-base">
+                                    <th class="p-3">Posición</th>
+                                    <th class="p-3">Jugador</th>
+                                    <th class="p-3">Equipo</th>
+                                    <th class="p-3 text-center">Goles</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-border-base text-xs">
+                                <tr class="hover:bg-gray-800">
+                                    <td class="p-3 font-bold text-primary">#1</td>
+                                    <td class="p-3 font-semibold text-on-surface">Juan Camilo</td>
+                                    <td class="p-3 text-on-surface-variant">ADSO Sena FC</td>
+                                    <td class="p-3 text-center font-bold text-primary">12</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

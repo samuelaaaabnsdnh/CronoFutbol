@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>RF05 - Solicitud y Aprobación de Roles</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#95d3ba",
+                        "primary-container": "#064e3b",
+                        "on-primary-container": "#80bea6",
+                        "bg-main": "#0a0a0a",
+                        "bg-card": "#1f2937",
+                        "bg-container": "#171717",
+                        "surface-container-low": "#191c1b",
+                        "border-base": "#374151",
+                        "on-surface": "#e1e3e0",
+                        "on-surface-variant": "#bfc9c3",
+                        "role-referee": "#eab308",
+                        "secondary": "#ffc640",
+                        "secondary-container": "#e3aa00",
+                        "on-secondary": "#402d00",
+                        "green-forest": "#15803d"
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+</head>
+<body class="bg-bg-main text-on-surface h-screen overflow-hidden flex flex-col md:flex-row">
+
+<aside class="hidden md:flex bg-surface-container-low border-r border-border-base w-64 h-full flex-col p-4 gap-2 shrink-0">
+    <div class="flex items-center gap-3 mb-6 px-2">
+        <div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">sports_soccer</span>
+        </div>
+        <div>
+            <h1 class="text-lg font-bold text-primary leading-none">CronoFútbol</h1>
+            <span class="text-xs text-on-surface-variant">Gestión Pro</span>
+        </div>
+    </div>
+    <nav class="flex-1 flex flex-col gap-2">
+        <a href="RF05.html" class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 text-sm font-semibold">
+            <span class="material-symbols-outlined">person_add</span> RF05: Roles
+        </a>
+        <a href="RF06.html" class="flex items-center gap-3 text-on-surface-variant hover:bg-gray-800 rounded-lg px-4 py-3 text-sm transition-colors">
+            <span class="material-symbols-outlined">admin_panel_settings</span> RF06: Permisos
+        </a>
+        <a href="RF07.html" class="flex items-center gap-3 text-on-surface-variant hover:bg-gray-800 rounded-lg px-4 py-3 text-sm transition-colors">
+            <span class="material-symbols-outlined">emoji_events</span> RF07: Torneos
+        </a>
+        <a href="RF08.html" class="flex items-center gap-3 text-on-surface-variant hover:bg-gray-800 rounded-lg px-4 py-3 text-sm transition-colors">
+            <span class="material-symbols-outlined">calendar_today</span> RF08: Partidos
+        </a>
+    </nav>
+</aside>
+
+<main class="flex-1 overflow-y-auto bg-bg-main p-6">
+    <div class="space-y-6">
+        <div>
+            <h2 class="text-3xl font-bold text-on-surface mb-2">RF05: Solicitud y Aprobación de Roles Especiales</h2>
+            <p class="text-on-surface-variant">Administra las solicitudes pendientes o eleva tu propio rango de acceso.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 space-y-4">
+                <div class="bg-bg-card border border-border-base rounded-xl p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-primary flex items-center gap-2">
+                        <span class="material-symbols-outlined">group_add</span> Solicitudes Pendientes
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-surface-container-low border border-border-base rounded-lg p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-on-surface-variant border border-border-base mt-1">
+                                    <span class="material-symbols-outlined">person</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-on-surface">Carlos Mendoza</h4>
+                                    <div class="flex items-center gap-2 mt-0.5 flex-wrap">
+                                        <span class="text-xs text-on-surface-variant">carlos.m@example.com</span>
+                                        <span class="bg-yellow-500/10 text-role-referee text-[11px] font-bold px-2 py-0.5 rounded border border-yellow-500/20 flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-[12px]">sports</span> Árbitro
+                                        </span>
+                                    </div>
+                                    <p class="text-xs italic text-on-surface-variant mt-2">"Experiencia de 5 años en ligas locales, adjunto certificado."</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-2 w-full sm:w-auto justify-end">
+                                <button class="bg-green-forest hover:bg-green-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-colors">Aprobar</button>
+                                <button class="bg-gray-700 hover:bg-gray-600 text-on-surface text-xs font-semibold px-4 py-2 rounded-lg transition-colors border border-border-base">Rechazar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-1">
+                <div class="bg-bg-card border border-border-base rounded-xl p-6">
+                    <div>
+                        <h3 class="font-bold text-on-surface text-lg">Eleva tu nivel de acceso</h3>
+                        <p class="text-xs text-on-surface-variant mt-0.5 mb-4">Proporciona una justificación válida.</p>
+                    </div>
+
+                    <form class="space-y-6" action="RF05.html">
+                        <div class="space-y-2">
+                            <label class="block text-xs font-semibold text-on-surface-variant">Rol Deseado</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="border-2 border-secondary-container bg-surface-container-low rounded-lg p-3 text-center cursor-pointer flex flex-col items-center justify-center gap-1">
+                                    <span class="material-symbols-outlined text-secondary text-xl">emoji_events</span>
+                                    <span class="text-xs font-bold text-on-surface">Organizador</span>
+                                </div>
+                                <div class="border border-border-base bg-bg-container rounded-lg p-3 text-center cursor-pointer flex flex-col items-center justify-center gap-1">
+                                    <span class="material-symbols-outlined text-on-surface-variant text-xl">sports</span>
+                                    <span class="text-xs text-on-surface-variant">Árbitro</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block text-xs font-semibold text-on-surface-variant">Documento Respaldatorio</label>
+                            <div class="border-2 border-dashed border-border-base rounded-lg p-4 text-center bg-bg-container cursor-pointer flex flex-col items-center justify-center">
+                                <span class="material-symbols-outlined text-on-surface-variant text-2xl mb-2">cloud_upload</span>
+                                <p class="text-xs text-on-surface font-semibold">Haz clic para buscar</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block text-xs font-semibold text-on-surface-variant">Justificación</label>
+                            <textarea class="w-full bg-bg-container border border-border-base rounded-lg p-3 text-xs text-on-surface focus:outline-none focus:border-primary h-24" placeholder="Describe tu experiencia..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-secondary hover:bg-yellow-500 text-on-secondary font-bold text-xs py-3 rounded-lg transition-colors shadow-lg">
+                            Enviar Solicitud
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
